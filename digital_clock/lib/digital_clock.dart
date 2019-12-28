@@ -43,6 +43,7 @@ class _DigitalClockState extends State<DigitalClock> {
   Timer _timer;
   num _temperature = 0.0;
   String _unitString = "°C";
+  String _location = "";
   @override
   void initState() {
     super.initState();
@@ -73,12 +74,18 @@ class _DigitalClockState extends State<DigitalClock> {
     setState(() {
       // Cause the clock to rebuild when the model changes.
       _updateTemperature();
+      _updateLocation();
     });
   }
   void _updateTemperature(){
     setState(() {
       _temperature = widget.model.temperature;
       _unitString = widget.model.unitString;
+    });
+  }
+  void _updateLocation(){
+    setState(() {
+      _location = widget.model.location;
     });
   }
   void _updateTime() {
@@ -137,6 +144,11 @@ class _DigitalClockState extends State<DigitalClock> {
                   children: <Widget>[
                     Text(this._temperature.toString()),
                     Text(_unitString),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text(_location),
                   ],
                 ),
               ],
