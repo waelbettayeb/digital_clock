@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 
 enum _Element {
   background,
@@ -41,6 +42,7 @@ class DigitalClock extends StatefulWidget {
 class _DigitalClockState extends State<DigitalClock> {
   DateTime _dateTime = DateTime.now();
   Timer _timer;
+  String _date = "";
   num _temperature = 0.0;
   String _unitString = "°C";
   String _location = "";
@@ -50,6 +52,8 @@ class _DigitalClockState extends State<DigitalClock> {
     widget.model.addListener(_updateModel);
     _updateTime();
     _updateTemperature();
+    _updateLocation();
+    _updateDate();
     _updateModel();
   }
 
@@ -75,6 +79,7 @@ class _DigitalClockState extends State<DigitalClock> {
       // Cause the clock to rebuild when the model changes.
       _updateTemperature();
       _updateLocation();
+      _updateDate();
     });
   }
   void _updateTemperature(){
@@ -86,6 +91,12 @@ class _DigitalClockState extends State<DigitalClock> {
   void _updateLocation(){
     setState(() {
       _location = widget.model.location;
+    });
+  }
+  void _updateDate(){
+    setState(() {
+      _dateTime = DateTime.now();
+      _date = Jiffy(_dateTime).format("EEEE, MMMM do, yyyy");
     });
   }
   void _updateTime() {
@@ -138,6 +149,11 @@ class _DigitalClockState extends State<DigitalClock> {
                   children: <Widget>[
                     Text(hour+':'+minute),
                     Text(amPm),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Text(_date),
                   ],
                 ),
                 Row(
