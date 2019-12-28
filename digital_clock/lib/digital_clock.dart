@@ -107,13 +107,6 @@ class _DigitalClockState extends State<DigitalClock> {
       color: colors[_Element.text],
       fontFamily: 'Kollektif',
       fontSize: fontSize,
-      shadows: [
-        Shadow(
-          blurRadius: 0,
-          color: colors[_Element.shadow],
-          offset: Offset(10, 0),
-        ),
-      ],
     );
 
     return Container(
