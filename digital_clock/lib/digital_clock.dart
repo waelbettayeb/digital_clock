@@ -123,7 +123,7 @@ class _DigitalClockState extends State<DigitalClock> {
           style: defaultStyle,
           child: Stack(
             children: <Widget>[
-              Positioned(left: offset, top: 0, child: Text(hour)),
+              Positioned(left: offset, top: 0, child: Text(hour+':'+minute)),
               Positioned(right: offset, bottom: offset, child: Text(minute)),
             ],
           ),
