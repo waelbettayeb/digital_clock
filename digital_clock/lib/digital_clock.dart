@@ -83,12 +83,12 @@ class _DigitalClockState extends State<DigitalClock> {
       _dateTime = DateTime.now();
       // Update once per minute. If you want to update every second, use the
       // following code.
-      _timer = Timer(
-        Duration(minutes: 1) -
-            Duration(seconds: _dateTime.second) -
-            Duration(milliseconds: _dateTime.millisecond),
-        _updateTime,
-      );
+//      _timer = Timer(
+//        Duration(minutes: 1) -
+//            Duration(seconds: _dateTime.second) -
+//            Duration(milliseconds: _dateTime.millisecond),
+//        _updateTime,
+//      );
       // Update once per second, but make sure to do it at the beginning of each
       // new second, so that the clock is accurate.
        _timer = Timer(
@@ -106,6 +106,8 @@ class _DigitalClockState extends State<DigitalClock> {
     final hour =
     DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
     final minute = DateFormat('mm').format(_dateTime);
+    final amPm = widget.model.is24HourFormat ?
+    DateFormat('a').format(_dateTime).toLowerCase(): '';
     final fontSize = MediaQuery.of(context).size.width / 14;
     final defaultStyle = TextStyle(
       color: colors[_Element.text],
@@ -122,7 +124,12 @@ class _DigitalClockState extends State<DigitalClock> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: <Widget>[
-                Text(hour+':'+minute),
+                Row(
+                  children: <Widget>[
+                    Text(hour+':'+minute),
+                    Text(amPm),
+                  ],
+                ),
                 Text(this._temperature.toString() + _unitString),
               ],
             ),
