@@ -72,6 +72,7 @@ class _DigitalClockState extends State<DigitalClock> {
   void _updateModel() {
     setState(() {
       // Cause the clock to rebuild when the model changes.
+      _updateTemperature();
     });
   }
   void _updateTemperature(){
