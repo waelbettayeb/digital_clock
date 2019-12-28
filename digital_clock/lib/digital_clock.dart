@@ -129,7 +129,7 @@ class _DigitalClockState extends State<DigitalClock> {
     final minute = DateFormat('mm').format(_dateTime);
     final amPm = widget.model.is24HourFormat ?
     DateFormat('a').format(_dateTime).toLowerCase(): '';
-    final fontSize = MediaQuery.of(context).size.width / 14;
+    final fontSize = MediaQuery.of(context).size.width / 21;
     final defaultStyle = TextStyle(
       color: colors[_Element.text],
       fontFamily: 'Kollektif',
@@ -158,7 +158,7 @@ class _DigitalClockState extends State<DigitalClock> {
                 ),
                 Row(
                   children: <Widget>[
-                    Text(this._temperature.toString()),
+                    Text(this._temperature.toStringAsFixed(0)),
                     Text(_unitString),
                   ],
                 ),
