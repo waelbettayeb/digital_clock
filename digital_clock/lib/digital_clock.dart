@@ -105,7 +105,7 @@ class _DigitalClockState extends State<DigitalClock> {
     final offset = -fontSize / 7;
     final defaultStyle = TextStyle(
       color: colors[_Element.text],
-      fontFamily: 'PressStart2P',
+      fontFamily: 'Kollektif',
       fontSize: fontSize,
       shadows: [
         Shadow(

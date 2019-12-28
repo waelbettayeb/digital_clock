@@ -19,6 +19,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   fonts:
-    - family: PressStart2P
+    - family: Kollektif
       fonts:
-        - asset: third_party/PressStart2P-Regular.ttf
+        - asset: third_party/kollektif/Kollektif.ttf
+        - asset: third_party/kollektif/Kollektif-Bold.ttf
+          weight: 700
