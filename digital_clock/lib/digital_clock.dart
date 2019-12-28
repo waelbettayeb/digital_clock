@@ -11,19 +11,19 @@ import 'package:intl/intl.dart';
 enum _Element {
   background,
   text,
-  shadow,
+  secondaryColor,
 }
 
 final _lightTheme = {
   _Element.background: Colors.white,
   _Element.text: Colors.black,
-  _Element.shadow: Colors.black45,
+  _Element.secondaryColor: Colors.black45,
 };
 
 final _darkTheme = {
   _Element.background: Colors.black,
   _Element.text: Colors.white,
-  _Element.shadow: Color(0xFF174EA6),
+  _Element.secondaryColor: Color(0xFF174EA6),
 };
 
 /// A basic digital clock.
