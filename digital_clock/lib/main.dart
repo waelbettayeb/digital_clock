@@ -18,7 +18,7 @@ void main() {
     // TODO(gspencergoog): Update this when TargetPlatform includes macOS.
     // https://github.com/flutter/flutter/issues/31366
     // See https://github.com/flutter/flutter/wiki/Desktop-shells#target-platform-override.
-    debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
+    debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
   }
 
   // This creates a clock that enables you to customize it.
