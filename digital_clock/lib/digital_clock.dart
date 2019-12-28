@@ -48,6 +48,7 @@ class _DigitalClockState extends State<DigitalClock> {
     super.initState();
     widget.model.addListener(_updateModel);
     _updateTime();
+    _updateTemperature();
     _updateModel();
   }
 
@@ -70,13 +71,13 @@ class _DigitalClockState extends State<DigitalClock> {
 
   void _updateModel() {
     setState(() {
-      _temperature = widget.model.temperature;
-      _unitString = widget.model.unitString;
-
       // Cause the clock to rebuild when the model changes.
     });
   }
-
+  void _updateTemperature(){
+    _temperature = widget.model.temperature;
+    _unitString = widget.model.unitString;
+  }
   void _updateTime() {
     setState(() {
       _dateTime = DateTime.now();
@@ -90,10 +91,10 @@ class _DigitalClockState extends State<DigitalClock> {
       );
       // Update once per second, but make sure to do it at the beginning of each
       // new second, so that the clock is accurate.
-      // _timer = Timer(
-      //   Duration(seconds: 1) - Duration(milliseconds: _dateTime.millisecond),
-      //   _updateTime,
-      // );
+       _timer = Timer(
+         Duration(seconds: 1) - Duration(milliseconds: _dateTime.millisecond),
+         _updateTime,
+       );
     });
   }
 
@@ -103,10 +104,9 @@ class _DigitalClockState extends State<DigitalClock> {
         ? _lightTheme
         : _darkTheme;
     final hour =
-        DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
+    DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
     final minute = DateFormat('mm').format(_dateTime);
-    final fontSize = MediaQuery.of(context).size.width / 3.5;
-    final offset = -fontSize / 7;
+    final fontSize = MediaQuery.of(context).size.width / 14;
     final defaultStyle = TextStyle(
       color: colors[_Element.text],
       fontFamily: 'Kollektif',
@@ -118,12 +118,14 @@ class _DigitalClockState extends State<DigitalClock> {
       child: Center(
         child: DefaultTextStyle(
           style: defaultStyle,
-          child: Stack(
-            children: <Widget>[
-              Positioned(left: offset, top: 0, child: Text(hour+':'+minute)),
-              Positioned(right: offset, bottom: offset, child:
-              Text(this._temperature.toString() + _unitString)),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: <Widget>[
+                Text(hour+':'+minute),
+                Text(this._temperature.toString() + _unitString),
+              ],
+            ),
           ),
         ),
       ),
