@@ -75,8 +75,10 @@ class _DigitalClockState extends State<DigitalClock> {
     });
   }
   void _updateTemperature(){
-    _temperature = widget.model.temperature;
-    _unitString = widget.model.unitString;
+    setState(() {
+      _temperature = widget.model.temperature;
+      _unitString = widget.model.unitString;
+    });
   }
   void _updateTime() {
     setState(() {
@@ -130,7 +132,12 @@ class _DigitalClockState extends State<DigitalClock> {
                     Text(amPm),
                   ],
                 ),
-                Text(this._temperature.toString() + _unitString),
+                Row(
+                  children: <Widget>[
+                    Text(this._temperature.toString()),
+                    Text(_unitString),
+                  ],
+                ),
               ],
             ),
           ),
