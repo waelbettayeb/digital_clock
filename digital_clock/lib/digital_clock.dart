@@ -41,7 +41,8 @@ class DigitalClock extends StatefulWidget {
 class _DigitalClockState extends State<DigitalClock> {
   DateTime _dateTime = DateTime.now();
   Timer _timer;
-
+  num _temperature = 0.0;
+  String _unitString = "°C";
   @override
   void initState() {
     super.initState();
@@ -69,6 +70,9 @@ class _DigitalClockState extends State<DigitalClock> {
 
   void _updateModel() {
     setState(() {
+      _temperature = widget.model.temperature;
+      _unitString = widget.model.unitString;
+
       // Cause the clock to rebuild when the model changes.
     });
   }
@@ -117,7 +121,8 @@ class _DigitalClockState extends State<DigitalClock> {
           child: Stack(
             children: <Widget>[
               Positioned(left: offset, top: 0, child: Text(hour+':'+minute)),
-              Positioned(right: offset, bottom: offset, child: Text(minute)),
+              Positioned(right: offset, bottom: offset, child:
+              Text(this._temperature.toString() + _unitString)),
             ],
           ),
         ),
