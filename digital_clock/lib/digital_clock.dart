@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_clock_helper/model.dart';
@@ -154,24 +155,26 @@ class _DigitalClockState extends State<DigitalClock> {
     final amPmSize = MediaQuery.of(context).size.width / 12;
     final dateSize = MediaQuery.of(context).size.width / 28;
     final clockStyle = TextStyle(
-        color: colors[_Element.text],
-        fontFamily: 'Kollektif',
-        fontSize: clockSize,
-        height: 0.5,
+      fontSize: clockSize,
+      fontFeatures: [FontFeature.enable('tnum')],
+      color: colors[_Element.text],
+      fontFamily: 'Jost',
+      height: 0.5,
+
     );
     final temperatureStyle = TextStyle(
       color: colors[_Element.text],
-      fontFamily: 'Kollektif',
+      fontFamily: 'Jost',
       fontSize: fontSize,
     );
     final amPmStyle = TextStyle(
       color: colors[_Element.text],
-      fontFamily: 'Kollektif',
+      fontFamily: 'Jost',
       fontSize: amPmSize,
     );
     final defaultStyle = TextStyle(
       color: colors[_Element.secondaryColor],
-      fontFamily: 'Kollektif',
+      fontFamily: 'Jost',
       fontSize: dateSize,
     );
 
@@ -209,7 +212,9 @@ class _DigitalClockState extends State<DigitalClock> {
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
                         children: <Widget>[
-                          Text(hour+':'+minute,
+                          Text(hour,
+                              style: clockStyle),
+                          Text(' '+minute,
                               style: clockStyle),
                           Text(amPm,
                             style: amPmStyle,),

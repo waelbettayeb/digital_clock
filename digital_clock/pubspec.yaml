@@ -21,8 +21,24 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   fonts:
-    - family: Kollektif
+    - family: Jost
       fonts:
-        - asset: third_party/kollektif/Kollektif.ttf
-        - asset: third_party/kollektif/Kollektif-Bold.ttf
+        - asset: third_party/Jost/TrueType/Jost-100-Hairline.ttf
+          weight: 100
+        - asset: third_party/Jost/TrueType/Jost-200-Thin.ttf
+          weight: 200
+        - asset: third_party/Jost/TrueType/Jost-300-Light.ttf
+          weight: 300
+        - asset: third_party/Jost/TrueType/Jost-400-Book.ttf
+          weight: 400
+        - asset: third_party/Jost/TrueType/Jost-500-Medium.ttf
+          weight: 500
+        - asset: third_party/Jost/TrueType/Jost-600-Semi.ttf
+          weight: 600
+        - asset: third_party/Jost/TrueType/Jost-700-Bold.ttf
           weight: 700
+        - asset: third_party/Jost/TrueType/Jost-800-Heavy.ttf
+          weight: 800
+        - asset: third_party/Jost/TrueType/Jost-900-Black.ttf
+          weight: 900
+
