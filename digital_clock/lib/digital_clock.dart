@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:developer';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -27,7 +27,7 @@ final _lightTheme = {
 final _darkTheme = {
   _Element.background: Colors.black,
   _Element.text: Colors.white,
-  _Element.secondaryColor: Color(0xFF174EA6),
+  _Element.secondaryColor: Colors.white70,
 };
 
 /// A basic digital clock.
@@ -142,52 +142,85 @@ class _DigitalClockState extends State<DigitalClock> {
     final minute = DateFormat('mm').format(_dateTime);
     final amPm = widget.model.is24HourFormat ?
     DateFormat('a').format(_dateTime).toLowerCase(): '';
-    final clockSize = MediaQuery.of(context).size.width / 4;
-    final fontSize = MediaQuery.of(context).size.width / 12;
-    final defaultStyle = TextStyle(
-      color: colors[_Element.text],
-      fontFamily: 'Kollektif',
-      fontSize: clockSize,
+    final clockSize = MediaQuery.of(context).size.width / 4.5;
+    final fontSize = MediaQuery.of(context).size.width / 16;
+    final amPmSize = MediaQuery.of(context).size.width / 12;
+    final dateSize = MediaQuery.of(context).size.width / 28;
+    final clockStyle = TextStyle(
+        color: colors[_Element.text],
+        fontFamily: 'Kollektif',
+        fontSize: clockSize,
+        height: 0.5,
     );
-    final secondStyle = TextStyle(
+    final temperatureStyle = TextStyle(
       color: colors[_Element.text],
       fontFamily: 'Kollektif',
       fontSize: fontSize,
+    );
+    final amPmStyle = TextStyle(
+      color: colors[_Element.text],
+      fontFamily: 'Kollektif',
+      fontSize: amPmSize,
+    );
+    final defaultStyle = TextStyle(
+      color: colors[_Element.secondaryColor],
+      fontFamily: 'Kollektif',
+      fontSize: dateSize,
     );
 
     return Container(
       color: colors[_Element.background],
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
                 children: <Widget>[
-                  Icon(WeatherIcons.wi_cloud),
-                  Text(this._temperature.toStringAsFixed(0)),
-                  Text(_unitString),
+                  Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: Icon(WeatherIcons.wi_cloud,
+                        size: fontSize,
+                        color: colors[_Element.secondaryColor]),
+                  ),
+                  Text(this._temperature.toStringAsFixed(0)+_unitString,
+                    style: temperatureStyle,),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
                 children: <Widget>[
-                  Text(hour+':'+minute,
-                      style: defaultStyle),
-                  Text(amPm,
-                    style: secondStyle,),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: <Widget>[
+                          Text(hour+':'+minute,
+                              style: clockStyle),
+                          Text(amPm,
+                            style: amPmStyle,),
+                        ],
+                      ),
+                      Text(_date,
+                        style:defaultStyle ,
+                      ),
+                    ],
+                  ),
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  Text(_date),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Text(_location),
+                  Text(_location,
+                    style:defaultStyle ,
+                  ),
                 ],
               ),
             ],
