@@ -3,11 +3,14 @@
 // found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:jiffy/jiffy.dart';
+//Weather Icons licensed under SIL OFL 1.1
+import 'package:flutter_icons/flutter_icons.dart';
 
 enum _Element {
   background,
@@ -46,6 +49,8 @@ class _DigitalClockState extends State<DigitalClock> {
   num _temperature = 0.0;
   String _unitString = "°C";
   String _location = "";
+  WeatherCondition  _weatherCondition;
+  String _weatherString = "";
   @override
   void initState() {
     super.initState();
@@ -54,6 +59,7 @@ class _DigitalClockState extends State<DigitalClock> {
     _updateTemperature();
     _updateLocation();
     _updateDate();
+    _updateWeatherCondition();
     _updateModel();
   }
 
@@ -79,7 +85,14 @@ class _DigitalClockState extends State<DigitalClock> {
       // Cause the clock to rebuild when the model changes.
       _updateTemperature();
       _updateLocation();
+      _updateWeatherCondition();
       _updateDate();
+    });
+  }
+  void _updateWeatherCondition(){
+    setState(() {
+      _weatherCondition = widget.model.weatherCondition;
+      _weatherString = widget.model.weatherString;
     });
   }
   void _updateTemperature(){
@@ -112,10 +125,10 @@ class _DigitalClockState extends State<DigitalClock> {
 //      );
       // Update once per second, but make sure to do it at the beginning of each
       // new second, so that the clock is accurate.
-       _timer = Timer(
-         Duration(seconds: 1) - Duration(milliseconds: _dateTime.millisecond),
-         _updateTime,
-       );
+      _timer = Timer(
+        Duration(seconds: 1) - Duration(milliseconds: _dateTime.millisecond),
+        _updateTime,
+      );
     });
   }
 
@@ -129,8 +142,14 @@ class _DigitalClockState extends State<DigitalClock> {
     final minute = DateFormat('mm').format(_dateTime);
     final amPm = widget.model.is24HourFormat ?
     DateFormat('a').format(_dateTime).toLowerCase(): '';
-    final fontSize = MediaQuery.of(context).size.width / 21;
+    final clockSize = MediaQuery.of(context).size.width / 4;
+    final fontSize = MediaQuery.of(context).size.width / 30;
     final defaultStyle = TextStyle(
+      color: colors[_Element.text],
+      fontFamily: 'Kollektif',
+      fontSize: clockSize,
+    );
+    final secondStyle = TextStyle(
       color: colors[_Element.text],
       fontFamily: 'Kollektif',
       fontSize: fontSize,
@@ -139,36 +158,35 @@ class _DigitalClockState extends State<DigitalClock> {
     return Container(
       color: colors[_Element.background],
       child: Center(
-        child: DefaultTextStyle(
-          style: defaultStyle,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Text(hour+':'+minute),
-                    Text(amPm),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Text(_date),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Text(this._temperature.toStringAsFixed(0)),
-                    Text(_unitString),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Text(_location),
-                  ],
-                ),
-              ],
-            ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Icon(WeatherIcons.wi_cloud),
+                  Text(this._temperature.toStringAsFixed(0)),
+                  Text(_unitString),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Text(hour+':'+minute,
+                      style: defaultStyle),
+                  Text(amPm),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Text(_date),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Text(_location),
+                ],
+              ),
+            ],
           ),
         ),
       ),

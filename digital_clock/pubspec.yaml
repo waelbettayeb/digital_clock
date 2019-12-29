@@ -12,6 +12,7 @@ dependencies:
     path: ../flutter_clock_helper
   cupertino_icons: ^0.1.2
   jiffy: ^2.1.2
+  flutter_icons: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:
