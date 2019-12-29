@@ -182,7 +182,7 @@ class _DigitalClockState extends State<DigitalClock> {
       color: colors[_Element.background],
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(50.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -202,7 +202,6 @@ class _DigitalClockState extends State<DigitalClock> {
                 ],
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
