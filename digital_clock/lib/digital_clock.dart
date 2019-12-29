@@ -30,6 +30,15 @@ final _darkTheme = {
   _Element.secondaryColor: Colors.white70,
 };
 
+final _icons = {
+  WeatherCondition.cloudy : WeatherIcons.wi_cloud,
+  WeatherCondition.foggy: WeatherIcons.wi_fog,
+  WeatherCondition.rainy: WeatherIcons.wi_rain,
+  WeatherCondition.snowy: WeatherIcons.wi_snow,
+  WeatherCondition.sunny: WeatherIcons.wi_day_sunny,
+  WeatherCondition.thunderstorm : WeatherIcons.wi_thunderstorm,
+  WeatherCondition.windy: WeatherIcons.wi_windy
+};
 /// A basic digital clock.
 ///
 /// You can do better than this!
@@ -50,7 +59,6 @@ class _DigitalClockState extends State<DigitalClock> {
   String _unitString = "°C";
   String _location = "";
   WeatherCondition  _weatherCondition;
-  String _weatherString = "";
   @override
   void initState() {
     super.initState();
@@ -92,7 +100,6 @@ class _DigitalClockState extends State<DigitalClock> {
   void _updateWeatherCondition(){
     setState(() {
       _weatherCondition = widget.model.weatherCondition;
-      _weatherString = widget.model.weatherString;
     });
   }
   void _updateTemperature(){
@@ -183,7 +190,7 @@ class _DigitalClockState extends State<DigitalClock> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(30.0),
-                    child: Icon(WeatherIcons.wi_cloud,
+                    child: Icon(_icons[_weatherCondition],
                         size: fontSize,
                         color: colors[_Element.secondaryColor]),
                   ),
