@@ -212,9 +212,7 @@ class _DigitalClockState extends State<DigitalClock> {
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         textBaseline: TextBaseline.alphabetic,
                         children: <Widget>[
-                          Text(hour,
-                              style: clockStyle),
-                          Text(' '+minute,
+                          Text(hour+':'+minute,
                               style: clockStyle),
                           Text(amPm,
                             style: amPmStyle,),
