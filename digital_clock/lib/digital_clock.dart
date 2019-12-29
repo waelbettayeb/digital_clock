@@ -182,7 +182,7 @@ class _DigitalClockState extends State<DigitalClock> {
       color: colors[_Element.background],
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(50.0),
+          padding: const EdgeInsets.all(40.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -192,7 +192,7 @@ class _DigitalClockState extends State<DigitalClock> {
                 textBaseline: TextBaseline.alphabetic,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(30.0),
+                    padding: const EdgeInsets.only(right: 30),
                     child: Icon(_icons[_weatherCondition],
                         size: fontSize,
                         color: colors[_Element.secondaryColor]),
