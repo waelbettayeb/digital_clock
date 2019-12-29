@@ -148,7 +148,7 @@ class _DigitalClockState extends State<DigitalClock> {
     DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
     final minute = DateFormat('mm').format(_dateTime);
     final amPm = widget.model.is24HourFormat ?
-    DateFormat('a').format(_dateTime).toLowerCase(): '';
+    '' : DateFormat('a').format(_dateTime).toLowerCase();
     final clockSize = MediaQuery.of(context).size.width / 4.5;
     final fontSize = MediaQuery.of(context).size.width / 16;
     final amPmSize = MediaQuery.of(context).size.width / 12;
